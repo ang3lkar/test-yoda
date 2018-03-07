@@ -18,7 +18,7 @@ node(label: 'Angelos-Slave') {
       lock(resource: 'mobile-web-performance-lock') {
         stage ('foo'){
           COMMIT_HASH = sh (
-            script: "git ls-remote --heads git@github.com:Workable/workable.git | grep \$BRANCH | awk '{print \$1}'",
+            script: "git ls-remote --heads git@github.com:Workable/workable.git | grep \$BRANCH\$ | awk '{print \$1}'",
             returnStdout: true).trim()
           echo "${COMMIT_HASH}"
         }
