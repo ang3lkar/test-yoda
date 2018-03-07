@@ -1,4 +1,4 @@
-import groovy.json.JsonSlurper
+import groovy.json.JsonSlurperClassic
 
 String GIT_LOG;
 String GIT_LOCAL_BRANCH;
@@ -23,7 +23,7 @@ node(label: 'Angelos-Slave') {
             script: "git ls-remote --heads git@github.com:Workable/workable.git | grep \$BRANCH\$ | awk '{print \$1}'",
             returnStdout: true).trim()
 
-          def jsonSlurper = new JsonSlurper()
+          def jsonSlurper = new JsonSlurperClassic()
           def object = jsonSlurper.parseText('{"sheetId":139882596, "basisBranchDashboardTime":3124, "branchDashboardTime":2921}');
           // sh "echo ${object.sheetId}"
           INDICATIVE_RESULTS = object
