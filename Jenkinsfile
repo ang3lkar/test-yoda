@@ -43,7 +43,7 @@ node(label: 'Angelos-Slave') {
           slackit([
             channel: YODA_SLACK_CHANNEL,
             color: "good",
-            message: "${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${BASIS_BRANCH} - ${BRANCH}(${COMMIT_HASH})\n\nResults available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID}```"
+            message: "${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```[${BASIS_BRANCH}] - [${BRANCH} (${COMMIT_HASH})]\n\nResults available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID}```"
           ])
       }
     }
