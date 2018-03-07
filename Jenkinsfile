@@ -20,7 +20,9 @@ node(label: 'Angelos-Slave') {
           COMMIT_HASH = sh (
             script: "git ls-remote --heads git@github.com:Workable/workable.git | grep \$BRANCH\$ | awk '{print \$1}'",
             returnStdout: true).trim()
-          echo "${COMMIT_HASH}"
+          sh "echo '--> \$${COMMIT_HASH}'"
+          sh "echo '--> ${COMMIT_HASH}'"
+          sh "echo '--> \$COMMIT_HASH'"
         }
       }
 
