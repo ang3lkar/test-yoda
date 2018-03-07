@@ -16,11 +16,11 @@ node(label: 'Angelos-Slave') {
       String PATH = "PATH=$PATH:/usr/local/bin"; // this is to find the npm command
 
       lock(resource: 'mobile-web-performance-lock') {
-        stage { 
+        stage ('foo'){
           COMMIT_HASH = sh (
             script: "git ls-remote --heads git@github.com:Workable/workable.git | grep \$BRANCH | awk '{print \$1}'",
             returnStdout: true).trim()
-          sh "echo \$COMMIT_HASH"
+          echo "${COMMIT_HASH}"
         }
       }
 
