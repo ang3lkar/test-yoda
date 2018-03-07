@@ -53,8 +53,8 @@ node(label: 'Angelos-Slave') {
                     |${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})
                     |
                     |DASHBOARD
-                    |${BASIS_BRANCH}:\t ${INDICATIVE_RESULTS}ms
-                    |${BRANCH}:\t ${INDICATIVE_RESULTS}ms
+                    |${BASIS_BRANCH}:\t ${''}ms
+                    |${BRANCH}:\t ${''}ms
                     |```
                     |\n
                     |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID} 
