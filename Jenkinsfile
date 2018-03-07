@@ -20,7 +20,7 @@ node(label: 'Angelos-Slave') {
           COMMIT_HASH = sh (
             script: "git ls-remote --heads git@github.com:Workable/workable.git | grep \$BRANCH\$ | awk '{print \$1}'",
             returnStdout: true).trim()
-          sh "echo '--> ${COMMIT_HASH}'"
+          INDICATIVE_RESULTS = "1234 5838"
         }
       }
 
@@ -46,7 +46,9 @@ node(label: 'Angelos-Slave') {
             message: """
                     |${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n 
                     |```${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})
-                    |\n\n 
+                    |> ${BASIS_BRANCH}: ${INDICATIVE_RESULTS.tokenize(' ')[0]}
+                    |> ${BRANCH}: ${INDICATIVE_RESULTS.tokenize(' ')[1]}
+                    |\n
                     |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID} 
                     |```
                     """.stripMargin()
