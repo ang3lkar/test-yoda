@@ -27,6 +27,7 @@ node(label: 'Angelos-Slave') {
       currentBuild.result = "FAILURE"
     } finally {
       switch(currentBuild.result) {
+          sh "echo 'FAILURE'"
         case "FAILURE":
           slackit([
             channel: process.env.YODA_SLACK_CHANNEL,
@@ -38,6 +39,7 @@ node(label: 'Angelos-Slave') {
           }
           break;
         default:
+            sh "echo 'DEFAULT'"
           slackit([
             channel: process.env.YODA_SLACK_CHANNEL,
             color: "good",
