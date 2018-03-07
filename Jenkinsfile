@@ -41,19 +41,11 @@ node(label: 'Angelos-Slave') {
           slackit([
             channel: process.env.YODA_SLACK_CHANNEL,
             color: "good",
-            message: "${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${BASIS_BRANCH} - ${BRANCH}()\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID}```"
+            message: "${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
           ])
       }
     }
   }
-}
-
-def killRails() {
-  sh "if (lsof -i -P | grep LISTEN | grep '*:3000' > pid.txt); then kill -9 \$(cat pid.txt | head -1 | awk '{print \$2}'); else echo 'Rails is not running'; fi"
-}
-
-def killSolr() {
-  sh "if (lsof -i -P | grep LISTEN | grep '*:8982' > pid.txt); then kill -9 \$(cat pid.txt | head -1 | awk '{print \$2}'); else echo 'Solr is not running'; fi"
 }
 
 def slackit(params) {
