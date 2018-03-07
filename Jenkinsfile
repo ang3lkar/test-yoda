@@ -25,7 +25,7 @@ node(label: 'Angelos-Slave') {
 
           def jsonSlurper = new JsonSlurper()
           def object = jsonSlurper.parseText('{"sheetId":139882596, "basisBranchDashboardTime":3124, "branchDashboardTime":2921}');
-          INDICATIVE_RESULTS = "1234 5838"
+          INDICATIVE_RESULTS = object
         }
       }
 
@@ -54,8 +54,8 @@ node(label: 'Angelos-Slave') {
                     |${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})
                     |
                     |DASHBOARD
-                    |${BASIS_BRANCH}:\t ${INDICATIVE_RESULTS.tokenize(' ')[0]}ms
-                    |${BRANCH}:\t ${INDICATIVE_RESULTS.tokenize(' ')[1]}ms
+                    |${BASIS_BRANCH}:\t ${INDICATIVE_RESULTS.basisBranchDashboardTime}ms
+                    |${BRANCH}:\t ${INDICATIVE_RESULTS.branchDashboardTime}ms
                     |```
                     |\n
                     |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID} 
