@@ -24,7 +24,8 @@ node(label: 'Angelos-Slave') {
             returnStdout: true).trim()
 
           def jsonSlurper = new JsonSlurper()
-          def object = jsonSlurper.parseText('{"sheetId":139882596, "basisBranchDashboardTime":3124, "branchDashboardTime":2921}');
+          // def object = jsonSlurper.parseText('{"sheetId":139882596, "basisBranchDashboardTime":3124, "branchDashboardTime":2921}');
+          def object = slurper.parseText('{"person":{"name":"Guillaume","age":33,"pets":["dog","cat"]}}')
           INDICATIVE_RESULTS = object
         }
       }
@@ -54,8 +55,8 @@ node(label: 'Angelos-Slave') {
                     |${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})
                     |
                     |DASHBOARD
-                    |${BASIS_BRANCH}:\t ${INDICATIVE_RESULTS.basisBranchDashboardTime}ms
-                    |${BRANCH}:\t ${INDICATIVE_RESULTS.branchDashboardTime}ms
+                    |${BASIS_BRANCH}:\t ${INDICATIVE_RESULTS.person.name}ms
+                    |${BRANCH}:\t ${INDICATIVE_RESULTS.person.age}ms
                     |```
                     |\n
                     |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID} 
