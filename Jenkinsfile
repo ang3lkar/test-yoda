@@ -22,9 +22,7 @@ node(label: 'Angelos-Slave') {
           COMMIT_HASH = sh (
             script: "git ls-remote --heads git@github.com:Workable/workable.git | grep \$BRANCH\$ | awk '{print \$1}'",
             returnStdout: true).trim()
-
-          def jsonSlurper = new JsonSlurperClassic()
-          def object = jsonSlurper.parseText('{"sheetId":139882596, "basisBranchDashboardTime":3124, "branchDashboardTime":2921}');
+          INDICATIVE_RESULTS = "139882596 3124 2921"
         }
       }
 
@@ -44,6 +42,11 @@ node(label: 'Angelos-Slave') {
           }
           break;
         default:
+          resultsMap = INDICATIVE_RESULTS.tokenize(' ')
+          sheetId = resultsMap[0]
+          basisBranchTime = resultsMap[1]
+          branchTime = resultsMap[2]
+
           slackit([
             channel: YODA_SLACK_CHANNEL,
             color: "good",
@@ -53,11 +56,11 @@ node(label: 'Angelos-Slave') {
                     |${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})
                     |
                     |DASHBOARD
-                    |${BASIS_BRANCH}:\t ${''}ms
-                    |${BRANCH}:\t ${''}ms
+                    |${BASIS_BRANCH}:\t ${basisBranchTime}ms
+                    |${BRANCH}:\t ${branchTime}ms
                     |```
                     |\n
-                    |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID} 
+                    |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID}#gid=${sheetId}
                     """.stripMargin()
           ])
       }
