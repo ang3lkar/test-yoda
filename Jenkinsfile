@@ -25,7 +25,7 @@ node(label: 'Angelos-Slave') {
 
           def jsonSlurper = new JsonSlurper()
           def object = jsonSlurper.parseText('{"sheetId":139882596, "basisBranchDashboardTime":3124, "branchDashboardTime":2921}');
-          sh "echo ${object.sheetId}"
+          // sh "echo ${object.sheetId}"
           INDICATIVE_RESULTS = object
         }
       }
