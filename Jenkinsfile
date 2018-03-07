@@ -45,13 +45,12 @@ node(label: 'Angelos-Slave') {
             color: "good",
             message: """
                     |${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n 
-                    |```${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})
-                    |> ${BASIS_BRANCH}:\t ${INDICATIVE_RESULTS.tokenize(' ')[0]}ms
+                    |```${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})```
                     |
+                    |> ${BASIS_BRANCH}:\t ${INDICATIVE_RESULTS.tokenize(' ')[0]}ms
                     |> ${BRANCH}:\t ${INDICATIVE_RESULTS.tokenize(' ')[1]}ms
                     |\n
                     |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID} 
-                    |```
                     """.stripMargin()
           ])
       }
