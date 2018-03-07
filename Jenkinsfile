@@ -26,11 +26,10 @@ node(label: 'Angelos-Slave') {
       caughtError = err;
       currentBuild.result = "FAILURE"
     } finally {
-      sh "echo 'FINALLY'"
       switch(currentBuild.result) {
         case "FAILURE":
           slackit([
-            channel: process.env.YODA_SLACK_CHANNEL,
+            channel: YODA_SLACK_CHANNEL,
             color: "danger",
             message: "${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${BRANCH}```${isAbortException ? '' : '\n```' + caughtError + '```'}"
           ])
@@ -39,11 +38,10 @@ node(label: 'Angelos-Slave') {
           }
           break;
         default:
-          sh "echo 'DEFAULT'"
           slackit([
-            channel: process.env.YODA_SLACK_CHANNEL,
+            channel: YODA_SLACK_CHANNEL,
             color: "good",
-            message: "${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            message: "${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n```${BASIS_BRANCH} - ${BRANCH}()\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID}```"
           ])
       }
     }
