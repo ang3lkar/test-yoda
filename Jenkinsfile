@@ -17,7 +17,8 @@ node(label: 'Angelos-Slave') {
 
       String PATH = "PATH=$PATH:/usr/local/bin"; // this is to find the npm command
 
-      lock(resource: 'mobile-web-performance-lock') {
+      String LOCK_SCOPE = env.NODE_NAME.replace(/ /, '-')
+      lock(resource: "mobile-web-performance-lock-$LOCK_SCOPE") {
         stage('foo') {
           COMMIT_HASH = sh (
             script: "git ls-remote --heads git@github.com:Workable/workable.git | grep \$BRANCH\$ | awk '{print \$1}'",
@@ -51,7 +52,7 @@ node(label: 'Angelos-Slave') {
             channel: YODA_SLACK_CHANNEL,
             color: "good",
             message: """
-                    |${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n 
+                    |${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n
                     |```
                     |${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})
                     |
