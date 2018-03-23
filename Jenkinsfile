@@ -5,7 +5,7 @@ String GIT_LOCAL_BRANCH;
 
 def caughtError;
 
-node(label: 'Angelos-Slave') {
+node(label: 'Mobile Builder 2') {
   currentBuild.result = "SUCCESS"
 
   ansiColor('xterm') {
