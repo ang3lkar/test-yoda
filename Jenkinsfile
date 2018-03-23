@@ -24,6 +24,7 @@ node(label: 'Angelos-Slave') {
             script: "git ls-remote --heads git@github.com:Workable/workable.git | grep \$BRANCH\$ | awk '{print \$1}'",
             returnStdout: true).trim()
           INDICATIVE_RESULTS = "139882596 3124 2921"
+          echo "$BRANCH:$COMMIT_HASH"
         }
       }
 
