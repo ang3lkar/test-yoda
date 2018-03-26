@@ -79,7 +79,7 @@ def relativeResult(int previous, int after) {
     result = 'slower'
     diff = 1 - (previous / after)
   }
-  return "${diff.toString().substring(0, 3)}x ${result}"
+  return "${diff.toString().substring(0, 4)}x ${result}"
 }
 
 def slackit(params) {
