@@ -58,7 +58,7 @@ node(label: 'Mobile Builder 2') {
                     |${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})
                     |
                     |DASHBOARD
-                    |${BASIS_BRANCH}:\t ${basisBranchTime}ms
+                    |${BASIS_BRANCH}:\t  ${basisBranchTime}ms
                     |${BRANCH}:\t ${branchTime}ms - ${result(basisBranchTime, branchTime)}
                     |```
                     |\n
@@ -70,7 +70,7 @@ node(label: 'Mobile Builder 2') {
   }
 }
 
-def result(previous, after) {
+def result([previous, after]) {
   if (previous > after) {
     result = 'faster'
     percentage = after / previous
