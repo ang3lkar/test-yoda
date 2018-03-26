@@ -48,6 +48,7 @@ node(label: 'Mobile Builder 2') {
           sheetId = resultsMap[0]
           basisBranchTime = resultsMap[1]
           branchTime = resultsMap[2]
+          foo = relativeResult(basisBranchTime, branchTime)
 
           slackit([
             channel: YODA_SLACK_CHANNEL,
@@ -59,7 +60,7 @@ node(label: 'Mobile Builder 2') {
                     |
                     |DASHBOARD
                     |${BASIS_BRANCH}:\t  ${basisBranchTime}ms
-                    |${BRANCH}:\t ${branchTime}ms - ${relativeResult(basisBranchTime, branchTime)}
+                    |${BRANCH}:\t ${branchTime}ms - ${foo}
                     |```
                     |\n
                     |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID}#gid=${sheetId}
@@ -70,7 +71,7 @@ node(label: 'Mobile Builder 2') {
   }
 }
 
-String relativeResult(int previous, int after) {
+def relativeResult(int previous, int after) {
   if (previous > after) {
     result = 'faster'
     percentage = after / previous
@@ -85,8 +86,4 @@ def slackit(params) {
   if (!env.SKIP_SLACK) {
     slackSend(params)
   }
-}
-
-def sanitizeJobName(jobName) {
-  return jobName.replaceAll('%2F', '/');
 }
