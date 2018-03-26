@@ -59,7 +59,7 @@ node(label: 'Mobile Builder 2') {
                     |
                     |DASHBOARD
                     |${BASIS_BRANCH}:\t ${basisBranchTime}ms
-                    |${BRANCH}:\t ${branchTime}ms
+                    |${BRANCH}:\t ${branchTime}ms - ${result(basisBranchTime, branchTime)}
                     |```
                     |\n
                     |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID}#gid=${sheetId}
@@ -68,6 +68,17 @@ node(label: 'Mobile Builder 2') {
       }
     }
   }
+}
+
+def result(previous, after) {
+  if (previous > after) {
+    result = 'faster'
+    percentage = after / previous
+  } else {
+    result = 'slower'
+    percentage = previous / after
+  }
+  return "(${percentage}x ${result})"
 }
 
 def slackit(params) {
