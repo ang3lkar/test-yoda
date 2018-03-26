@@ -74,11 +74,12 @@ node(label: 'Mobile Builder 2') {
 def relativeResult(int previous, int after) {
   if (previous > after) {
     result = 'faster'
-    percentage = after / previous
+    fraction = after / previous
   } else {
     result = 'slower'
-    percentage = previous / after
+    fraction = previous / after
   }
+  percentage = Math.round(fraction * 100) / 100
   return "${percentage}x ${result}"
 }
 
