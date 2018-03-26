@@ -48,7 +48,7 @@ node(label: 'Mobile Builder 2') {
           sheetId = resultsMap[0]
           basisBranchTime = resultsMap[1]
           branchTime = resultsMap[2]
-          foo = relativeResult(basisBranchTime, branchTime)
+          foo = relativeResult(basisBranchTime.toInteger(), branchTime.toInteger())
 
           slackit([
             channel: YODA_SLACK_CHANNEL,
