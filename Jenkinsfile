@@ -74,13 +74,12 @@ node(label: 'Mobile Builder 2') {
 def relativeResult(int previous, int after) {
   if (previous > after) {
     result = 'faster'
-    fraction = after / previous
+    diff = 1 - (after / previous)
   } else {
     result = 'slower'
-    fraction = previous / after
+    diff = 1 - (previous / after)
   }
-  // percentage = Math.round(fraction * 100) / 100
-  return "${fraction.toString().substring(0, 3)}x ${result}"
+  return "${diff.toString().substring(0, 3)}x ${result}"
 }
 
 def slackit(params) {
