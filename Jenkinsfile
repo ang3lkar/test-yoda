@@ -79,8 +79,8 @@ def relativeResult(int previous, int after) {
     result = 'slower'
     fraction = previous / after
   }
-  percentage = Math.round(fraction * 100) / 100
-  return "${percentage}x ${result}"
+  // percentage = Math.round(fraction * 100) / 100
+  return "${fraction.round(2)}x ${result}"
 }
 
 def slackit(params) {
