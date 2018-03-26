@@ -70,7 +70,7 @@ node(label: 'Mobile Builder 2') {
   }
 }
 
-def relativeResult(previous, after) {
+def relativeResult(int previous, int after) {
   if (previous > after) {
     result = 'faster'
     percentage = after / previous
