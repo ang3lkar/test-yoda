@@ -21,7 +21,7 @@ node(label: 'Mobile Builder 2') {
       lock(resource: "mobile-web-performance-lock-$LOCK_SCOPE") {
         stage('foo') {
           COMMIT_HASH = sh (
-            script: "git ls-remote --heads https://github.com/Workable/workable.git | grep \$BRANCH | awk '{print \$1}'",
+            script: "git ls-remote --heads https://github.com/Workable/workable.git | grep \$BRANCH\$ | awk '{print \$1}'",
             returnStdout: true).trim()
           INDICATIVE_RESULTS = "139882596 3124 2921"
           echo "$BRANCH:$COMMIT_HASH"
