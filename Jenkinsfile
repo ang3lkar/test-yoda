@@ -25,10 +25,9 @@ node(label: 'Mobile Builder 2') {
             returnStdout: true).trim()
           INDICATIVE_RESULTS = "139882596 3124 2921"
           echo "$BRANCH:$COMMIT_HASH"
-          // currentBuild.description = COMMIT_HASH
-          // echo "currentBuild.description: ${currentBuild.description}"
-          // echo "previousBuild.description: ${currentBuild.previousBuild.description}"
-          echo currentBuild.buildVariables
+          currentBuild.description = COMMIT_HASH
+          echo "currentBuild.description: ${currentBuild.description}"
+          echo "previousBuild.description: ${currentBuild.previousBuild.description}"
         }
       }
 
@@ -63,8 +62,8 @@ node(label: 'Mobile Builder 2') {
                     |${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})
                     |
                     |DASHBOARD
-                    |${BASIS_BRANCH}:\t  ${basisBranchTime}ms
-                    |${BRANCH}:\t ${branchTime}ms - ${foo}
+                    |${BASIS_BRANCH.padRight(50)}:\t ${basisBranchTime}ms
+                    |${BRANCH.padRight(50)}:\t ${branchTime}ms - ${foo}
                     |```
                     |\n
                     |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID}#gid=${sheetId}
