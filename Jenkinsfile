@@ -53,7 +53,7 @@ node(label: 'Mobile Builder 2') {
           branchTime = resultsMap[2]
           foo = relativeResult(basisBranchTime.toInteger(), branchTime.toInteger())
 
-          paddingLength = [BRANCH.length, BASIS_BRANCH.length].max()
+          paddingLength = [BRANCH.length(), BASIS_BRANCH.length()].max()
 
           slackit([
             channel: YODA_SLACK_CHANNEL,
