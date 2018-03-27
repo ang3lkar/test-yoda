@@ -53,7 +53,7 @@ node(label: 'Mobile Builder 2') {
           branchTime = resultsMap[2]
           foo = relativeResult(basisBranchTime.toInteger(), branchTime.toInteger())
 
-          Integer[][] testArray = [BRANCH.length(), BASIS_BRANCH.length()]
+          Integer[] testArray = [BRANCH.length(), BASIS_BRANCH.length()]
           paddingLength = testArray.max()
 
           slackit([
