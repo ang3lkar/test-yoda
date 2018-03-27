@@ -53,6 +53,8 @@ node(label: 'Mobile Builder 2') {
           branchTime = resultsMap[2]
           foo = relativeResult(basisBranchTime.toInteger(), branchTime.toInteger())
 
+          paddingLength = [BRANCH.length, BASIS_BRANCH.length].max()
+
           slackit([
             channel: YODA_SLACK_CHANNEL,
             color: "good",
@@ -62,8 +64,8 @@ node(label: 'Mobile Builder 2') {
                     |${BASIS_BRANCH} - ${BRANCH} (${COMMIT_HASH})
                     |
                     |DASHBOARD
-                    |${BASIS_BRANCH.padRight(50)}:\t ${basisBranchTime}ms
-                    |${BRANCH.padRight(50)}:\t ${branchTime}ms - ${foo}
+                    |${BASIS_BRANCH.padRight(paddingLength)}:\t ${basisBranchTime}ms
+                    |${BRANCH.padRight(paddingLength)}:\t ${branchTime}ms - ${foo}
                     |```
                     |\n
                     |Results available at:\nhttps://docs.google.com/spreadsheets/d/${YODA_SHEET_ID}#gid=${sheetId}
