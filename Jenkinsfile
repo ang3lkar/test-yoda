@@ -25,8 +25,7 @@ node(label: 'Mobile Builder 2') {
             returnStdout: true).trim()
           INDICATIVE_RESULTS = "139882596 3124 2921"
           echo "$BRANCH:$COMMIT_HASH"
-          currentBuild.some_var = "ANGELKAR"
-          echo currentBuild.previousBuild.some_var
+          echo currentBuild.previousBuild.buildVariables
         }
       }
 
