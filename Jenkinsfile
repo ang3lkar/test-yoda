@@ -51,14 +51,16 @@ node(label: 'Mobile Builder 2') {
           sheetId = resultsMap[0]
           basisBranchTime = resultsMap[1]
           branchTime = resultsMap[2]
-          foo = relativeResult(basisBranchTime.toInteger(), branchTime.toInteger())
+
+          result = (basisBranchTime > branchTime) ? "faster" : "slower"
+          diff = percentage(result, basisBranchTime.toInteger(), branchTime.toInteger())
 
           Integer[] testArray = [BRANCH.length(), BASIS_BRANCH.length()]
           paddingLength = testArray.max() + 5
 
           slackit([
             channel: YODA_SLACK_CHANNEL,
-            color: "good",
+            color: (result == "faster") ? "good" : "warning",
             message: """
                     |${JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)\n
                     |```
@@ -66,7 +68,7 @@ node(label: 'Mobile Builder 2') {
                     |
                     |== DASHBOARD ==
                     |${(BASIS_BRANCH+":").padRight(paddingLength)} ${basisBranchTime}ms
-                    |${(BRANCH+":").padRight(paddingLength)} ${branchTime}ms - ${foo}
+                    |${(BRANCH+":").padRight(paddingLength)} ${branchTime}ms - ${diff}x ${result}
                     |```
                     |\n
                     |<https://docs.google.com/spreadsheets/d/${YODA_SHEET_ID}#gid=${sheetId}|View Results>
@@ -77,15 +79,13 @@ node(label: 'Mobile Builder 2') {
   }
 }
 
-def relativeResult(int previous, int after) {
-  if (previous > after) {
-    result = 'faster'
+def percentage(String result, int previous, int after) {
+  if (result == "faster") {
     diff = 1 - (after / previous)
   } else {
-    result = 'slower'
     diff = 1 - (previous / after)
   }
-  return "${diff.toString().substring(0, 4)}x ${result}"
+  return "${diff.toString().substring(0, 4)}"
 }
 
 def slackit(params) {
